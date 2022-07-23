@@ -1,30 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {
-      "Business/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "compile": {
-          "bin/placeholder/Business.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Business.dll": {}
-        }
-      }
-    }
+    "net6.0": {}
   },
-  "libraries": {
-    "Business/1.0.0": {
-      "type": "project",
-      "path": "../Business/Business.csproj",
-      "msbuildProject": "../Business/Business.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    "net6.0": [
-      "Business >= 1.0.0"
-    ]
+    "net6.0": []
   },
   "packageFolders": {
     "/Users/mozartgil/.nuget/packages/": {}
@@ -32,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mozartgil/Dropbox/Dev/2022/Mozart Gil - Landis Test/Interface/Interface.csproj",
-      "projectName": "Interface",
-      "projectPath": "/Users/mozartgil/Dropbox/Dev/2022/Mozart Gil - Landis Test/Interface/Interface.csproj",
+      "projectUniqueName": "/Users/mozartgil/Dropbox/Dev/2022/Mozart Gil - Landis Test/Business/Business.csproj",
+      "projectName": "Business",
+      "projectPath": "/Users/mozartgil/Dropbox/Dev/2022/Mozart Gil - Landis Test/Business/Business.csproj",
       "packagesPath": "/Users/mozartgil/.nuget/packages/",
-      "outputPath": "/Users/mozartgil/Dropbox/Dev/2022/Mozart Gil - Landis Test/Interface/obj/",
+      "outputPath": "/Users/mozartgil/Dropbox/Dev/2022/Mozart Gil - Landis Test/Business/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/mozartgil/.nuget/NuGet/NuGet.Config"
@@ -50,11 +31,7 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {
-            "/Users/mozartgil/Dropbox/Dev/2022/Mozart Gil - Landis Test/Business/Business.csproj": {
-              "projectPath": "/Users/mozartgil/Dropbox/Dev/2022/Mozart Gil - Landis Test/Business/Business.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

@@ -13,3 +13,6 @@
 /Users/mozartgil/Dropbox/Dev/2022/Mozart Gil - Landis Test/Interface/obj/Debug/net6.0/Interface.pdb
 /Users/mozartgil/Dropbox/Dev/2022/Mozart Gil - Landis Test/Interface/obj/Debug/net6.0/Interface.genruntimeconfig.cache
 /Users/mozartgil/Dropbox/Dev/2022/Mozart Gil - Landis Test/Interface/obj/Debug/net6.0/ref/Interface.dll
+/Users/mozartgil/Dropbox/Dev/2022/Mozart Gil - Landis Test/Interface/bin/Debug/net6.0/Business.dll
+/Users/mozartgil/Dropbox/Dev/2022/Mozart Gil - Landis Test/Interface/bin/Debug/net6.0/Business.pdb
+/Users/mozartgil/Dropbox/Dev/2022/Mozart Gil - Landis Test/Interface/obj/Debug/net6.0/Interface.csproj.CopyComplete

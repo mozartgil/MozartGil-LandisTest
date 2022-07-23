@@ -1,4 +1,5 @@
 ﻿using Interface;
+using Business;
 
 class Program
 {
@@ -7,7 +8,8 @@ class Program
         Console.Clear();
         
         var keyOption = "1";
-        
+        var logger = new ConsoleLogger();
+
         while (keyOption != "7")
         {
             PrintApplicationHeader();
@@ -26,13 +28,24 @@ class Program
                 if (keyOption == "1")
                 {
                     Console.Clear();
-                    Console.WriteLine("EXITING THE APPLICATION. THANK YOU!");
-                    Console.WriteLine("");
+                    logger.Log(LogLevel.Information, "EXITING THE APPLICATION. THANK YOU!");
                     break;
                 }
 
                 Console.Clear();
             }
+        }
+    }
+
+    /// <summary>
+    /// Class to write Console Loggers
+    /// </summary>
+    public class ConsoleLogger : ILogger
+    {
+        public void Log(LogLevel logLevel, string message)
+        {
+            Console.WriteLine($"{logLevel}: {message}");
+            Console.WriteLine("");
         }
     }
 
@@ -52,6 +65,7 @@ class Program
     public static string MenuOption()
     {
         var keyOption = "0";
+        var logger = new ConsoleLogger();
 
         Console.WriteLine("Press 1 to INSERT a new Endpoint");
         Console.WriteLine("Press 2 to EDIT an existing Endpoint");
@@ -67,8 +81,7 @@ class Program
         while (!InputValidations.CheckMenuInput(1, 6, keyOption))
         {
             Console.WriteLine("");
-            Console.WriteLine("Please choose a valid option!");
-            Console.WriteLine("");
+            logger.Log(LogLevel.Error, "Please choose a valid option!");
             Console.WriteLine("Press 1 to INSERT a new Endpoint");
             Console.WriteLine("Press 2 to EDIT an existing Endpoint");
             Console.WriteLine("Press 3 to DELETE an existing Endpoint");
@@ -89,6 +102,7 @@ class Program
     public static string ExitingApplicationOption() 
     {
         var keyOption = "0";
+        var logger = new ConsoleLogger();
 
         Console.WriteLine("Are you sure you want to exit the application?");
         Console.WriteLine("Press 1 to CONFIRM");
@@ -101,7 +115,7 @@ class Program
         while (!InputValidations.CheckMenuInput(1, 2, keyOption))
         {
             Console.WriteLine("");
-            Console.WriteLine("Please choose a valid option!");
+            logger.Log(LogLevel.Error, "Please choose a valid option!");
             Console.WriteLine("Press 1 to CONFIRM and exit the application");
             Console.WriteLine("Press 2 to RETURN to MENU");
             Console.WriteLine("--------------------------");
