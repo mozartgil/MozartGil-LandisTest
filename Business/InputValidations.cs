@@ -1,4 +1,4 @@
-namespace Interface
+namespace Business
 {
     public class InputValidations
     {

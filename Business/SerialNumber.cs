@@ -13,10 +13,6 @@ namespace Business
         /// <summary>
         /// Validates an Endpoint Serial Number
         /// </summary>
-        /// <param name="endpointSerialNumber"></param>
-        /// <param name="logger"></param>
-        /// <param name="isNullValidation"></param>
-        /// <param name="existingSerialNumberValidation"></param>
         /// <returns></returns>
         public bool ValidatingEndpointSerialNumber(ILogger logger, EndpointsList Endpoints, bool isNullValidation = true, bool existingSerialNumberValidation = true)
         {
@@ -54,7 +50,6 @@ namespace Business
         /// <summary>
         /// EDIT Endpoint by its Serial Number
         /// </summary>
-        /// <param name="logger"></param>
         public List<Endpoint> EditEndpoint(ILogger logger, EndpointsList Endpoints)
         {
             var endpointToEdit = Endpoints.endpointsList.Where(endpoint => endpoint.serialNumber == serialNumber.ToUpper()).ToList();
@@ -68,5 +63,57 @@ namespace Business
             return null;
         }
 
+        /// <summary>
+        /// DETELE Endpoint by its Serial Number
+        /// </summary>
+        public void DeleteEndpoint(ILogger logger, EndpointsList Endpoints)
+        {
+            var keyOption = "1";
+            var endpointsToDelete = Endpoints.endpointsList.Where(endpoint => endpoint.serialNumber == serialNumber.ToUpper()).ToList();
+
+            if (endpointsToDelete.Count() > 0)
+            {
+                Console.WriteLine($"Are you sure you want to DELETE the Endpoint below?");
+
+                endpointsToDelete.First().PrintEndpointInfo();
+
+                Console.WriteLine($"Type 1 to CONFIRM");
+                Console.WriteLine($"Type 2 to CANCEL");
+                Console.Write("Option: ");
+                keyOption = Console.ReadLine();
+                Console.WriteLine("--------------------------");
+
+                while (!InputValidations.CheckMenuInput(1, 2, keyOption))
+                {
+                    Console.WriteLine("");
+                    Console.WriteLine("--------------------------");
+                    logger.Log(LogLevel.Error, "Please choose a valid option!");
+                    Console.WriteLine($"Type 1 to CONFIRM");
+                    Console.WriteLine($"Type 2 to CANCEL");
+                    Console.Write("Option: ");
+                    keyOption = Console.ReadLine();
+                    Console.WriteLine("--------------------------");
+                }
+
+                if (keyOption == "1")
+                {
+                    Endpoints.endpointsList.Remove(endpointsToDelete.First());
+
+                    logger.Log(LogLevel.Information, "Endpoint deleted successfully!");
+                    Console.WriteLine("--------------------------");
+
+                    return;
+                }
+
+                logger.Log(LogLevel.Information, "Endpoint NOT deleted!");
+                Console.WriteLine("--------------------------");
+
+                return;
+            }
+
+            logger.Log(LogLevel.Information, $"No Endpoint with the Serial Number {serialNumber.ToUpper()} was found.");
+            Console.WriteLine("--------------------------");
+            Console.WriteLine("");
+        }
     }
 }
