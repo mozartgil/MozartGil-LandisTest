@@ -115,5 +115,21 @@ namespace Business
             Console.WriteLine("--------------------------");
             Console.WriteLine("");
         }
+    
+        public void FindEndpointBySerialNumber(ILogger logger, EndpointsList Endpoints)
+        {
+            var foundEndpoints = Endpoints.endpointsList.Where(endpoint => endpoint.serialNumber == serialNumber.ToUpper()).ToList();
+
+            if (foundEndpoints.Count() > 0)
+            {
+                foundEndpoints.First().PrintEndpointInfo();
+                
+                return;
+            }
+
+            logger.Log(LogLevel.Information, $"No Endpoint with the Serial Number {serialNumber.ToUpper()} was found.");
+            Console.WriteLine("--------------------------");
+            Console.WriteLine("");
+        }
     }
 }

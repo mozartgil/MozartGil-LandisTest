@@ -28,6 +28,8 @@ namespace Interface
                     DeleteEndpoint();    
                 else if (keyOption == "4") // LIST ALL ENDPOINTS
                     ListAllEndpoints();
+                else if (keyOption == "5") // FIND A ENDPOINT BY SERIAL NUYMBER
+                    FindEndpointBySerialNumber();
                 else if (keyOption == "6") // EXIT APPLICATION
                 {
                     keyOption = ExitingApplicationOption();
@@ -411,6 +413,36 @@ namespace Interface
             if (Endpoints.HasAnyEndpoint(logger))
             {
                 Endpoints.ListiAllEndpoints();
+
+                return;
+            }
+        }
+    
+        /// <summary>
+        /// CASE 5: FIND A ENDPOINT BY SERIAL NUMBER
+        /// </summary>
+        public static void FindEndpointBySerialNumber()
+        {
+            var logger = new ConsoleLogger();
+            
+            Console.Clear();
+
+            if (Endpoints.HasAnyEndpoint(logger))
+            {
+                Console.WriteLine("FINDING an Endpoint");
+                Console.WriteLine("--------------------------");
+                Console.Write("Inform the Endpoint Serial Number to FIND: ");
+                SerialNumber endpointSerialNumber = new SerialNumber(Console.ReadLine());
+                Console.WriteLine("--------------------------");
+                Console.WriteLine("");
+
+                while (!endpointSerialNumber.ValidatingEndpointSerialNumber(logger, Endpoints, true, false))
+                {
+                    endpointSerialNumber.serialNumber = Console.ReadLine();
+                    Console.WriteLine("");
+                }
+
+                endpointSerialNumber.FindEndpointBySerialNumber(logger, Endpoints);
 
                 return;
             }
