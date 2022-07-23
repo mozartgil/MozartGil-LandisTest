@@ -3,6 +3,8 @@ using Business;
 
 class Program
 {
+    public static List<Endpoint> ListEndpoints = new List<Endpoint>();
+    public static EndpointsList Endpoints = new EndpointsList(ListEndpoints);
     static void Main()
     {
         Console.Clear();
@@ -18,6 +20,8 @@ class Program
 
             if (keyOption == "1")
                 InsertNewEndpoint(); //INSERT NEW ENDPOINT
+            else if (keyOption == "4") // LIST ALL ENDPOINTS
+                ListAllEndpoints();
             else if (keyOption == "6") // EXIT APPLICATION
             {
                 keyOption = ExitingApplicationOption();
@@ -299,7 +303,7 @@ class Program
         // string meterFirmwareVersion = "FRW-1.1";
         // SwitchState switchState = SwitchState.Armed;
 
-        while (!endpointSerialNumber.ValidatingEndpointSerialNumber(logger))
+        while (!endpointSerialNumber.ValidatingEndpointSerialNumber(logger, Endpoints))
         {
             endpointSerialNumber.serialNumber = Console.ReadLine();
             Console.WriteLine("");
@@ -313,7 +317,29 @@ class Program
             switchState
         );
 
+        Endpoints.AddEndpointToList(endPoint);
+
+        // System.Console.WriteLine($"************************************************************");
+        // System.Console.WriteLine($"Endpoints list has {Endpoints.endpointsList.Count} endpoints");
+        // System.Console.WriteLine($"************************************************************");
+        // System.Console.WriteLine($"");
+
     }
 
+    /// <summary>
+    /// CASE 4: LISTING ALL ENDPOINTS
+    /// </summary>
+    public static void ListAllEndpoints()
+    {
+        var logger = new ConsoleLogger();
 
+        Console.Clear();
+
+        if (Endpoints.HasAnyEndpoint(logger))
+        {
+            Endpoints.ListiAllEndpoints();
+
+            return;
+        }
+    }
 }

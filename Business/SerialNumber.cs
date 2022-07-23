@@ -15,9 +15,9 @@ namespace Business
         /// <param name="endpointSerialNumber"></param>
         /// <param name="logger"></param>
         /// <param name="isNullValidation"></param>
-        /// <param name="existingSNValidation"></param>
+        /// <param name="existingSerialNumberValidation"></param>
         /// <returns></returns>
-        public bool ValidatingEndpointSerialNumber(ILogger logger, bool isNullValidation = true, bool existingSNValidation = true)
+        public bool ValidatingEndpointSerialNumber(ILogger logger, EndpointsList Endpoints, bool isNullValidation = true, bool existingSerialNumberValidation = true)
         {
             //NULL OR WHITE?
             if (isNullValidation)
@@ -28,6 +28,21 @@ namespace Business
                     
                     Console.WriteLine("--------------------------");
                     Console.Write("Inform a VALID Endpoint Serial Number: ");
+                    return false;
+                }
+            }
+
+            //VERIFYING IF SERIAL NUMBER IS ALREADY TAKEN
+            if (existingSerialNumberValidation)
+            {
+                var existingSerialNumber = Endpoints.endpointsList.Where(endpoint => endpoint.serialNumber == this.serialNumber.ToUpper()).Count();
+
+                if (existingSerialNumber > 0)
+                {
+                    logger.Log(LogLevel.Error, $"Endpoint serial number {serialNumber.ToUpper()} is already taken.");
+                    
+                    Console.WriteLine("--------------------------");
+                    Console.Write("Inform another Endpoint Serial Number: ");
                     return false;
                 }
             }
