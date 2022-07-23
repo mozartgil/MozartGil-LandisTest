@@ -20,6 +20,8 @@ class Program
 
             if (keyOption == "1")
                 InsertNewEndpoint(); //INSERT NEW ENDPOINT
+            else if (keyOption == "2") // EDIT AN EXISTING ENDPOINT
+                EditEndpoint();    
             else if (keyOption == "4") // LIST ALL ENDPOINTS
                 ListAllEndpoints();
             else if (keyOption == "6") // EXIT APPLICATION
@@ -324,6 +326,43 @@ class Program
         // System.Console.WriteLine($"************************************************************");
         // System.Console.WriteLine($"");
 
+    }
+
+    /// <summary>
+    /// CASE 2: EDITING AN ENDPOINT
+    /// </summary>
+    public static void EditEndpoint()
+    {
+        var logger = new ConsoleLogger();
+
+        Console.Clear();
+
+        if (Endpoints.HasAnyEndpoint(logger))
+        {
+            Console.WriteLine("EDITING Endpoint");
+            Console.WriteLine("--------------------------");
+            Console.Write("Inform the Endpoint Serial Number to EDIT: ");
+            SerialNumber endpointSerialNumber = new SerialNumber(Console.ReadLine());
+            Console.WriteLine("");
+
+            // string endPointSerialNumber = "123";
+            while (!endpointSerialNumber.ValidatingEndpointSerialNumber(logger, Endpoints, true, false))
+            {
+                endpointSerialNumber.serialNumber = Console.ReadLine();
+                Console.WriteLine("");
+            }
+
+            var endpointToEdit = endpointSerialNumber.EditEndpoint(logger, Endpoints);
+
+            if (endpointToEdit != null)
+            {
+                endpointToEdit.First().switchState = SwitchStateMenu();
+
+                logger.Log(LogLevel.Information, "Endpoint updated successfully!");
+                Console.WriteLine("--------------------------");
+            }
+
+        }
     }
 
     /// <summary>

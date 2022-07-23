@@ -1,3 +1,4 @@
+
 namespace Business
 {
     public class SerialNumber
@@ -48,6 +49,23 @@ namespace Business
             }
             
             return true;
+        }
+
+        /// <summary>
+        /// EDIT Endpoint by its Serial Number
+        /// </summary>
+        /// <param name="logger"></param>
+        public List<Endpoint> EditEndpoint(ILogger logger, EndpointsList Endpoints)
+        {
+            var endpointToEdit = Endpoints.endpointsList.Where(endpoint => endpoint.serialNumber == serialNumber.ToUpper()).ToList();
+
+            if (endpointToEdit.Count() > 0)
+                return endpointToEdit;
+
+            logger.Log(LogLevel.Information, $"No Endpoint with the Serial Number {serialNumber.ToUpper()} was found.");
+            Console.WriteLine("--------------------------");
+            Console.WriteLine("");
+            return null;
         }
 
     }
