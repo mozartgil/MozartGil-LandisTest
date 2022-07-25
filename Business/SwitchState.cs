@@ -1,9 +1,8 @@
-namespace Business
+namespace SwitchStateBusiness;
+
+public enum SwitchState
 {
-    public enum SwitchState
-    {
-        Disconnected = 0,
-        Connected = 1,
-        Armed = 2
-    }
+    Disconnected = 0,
+    Connected = 1,
+    Armed = 2
 }

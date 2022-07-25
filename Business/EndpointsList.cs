@@ -1,41 +1,62 @@
-namespace Business
+using EndpointBusiness;
+using IloogerBusiness;
+
+namespace EndpointsListBusiness;
+
+public class EndpointsList
 {
-    public class EndpointsList
+    public List<Endpoint> endpointsList;
+
+    public EndpointsList(List<Endpoint> endpointsList) 
     {
-        public List<Endpoint> endpointsList;
+        this.endpointsList = endpointsList;
+    }
 
-        public EndpointsList(List<Endpoint> endpointsList) 
+    public bool AddEndpointToList(Endpoint endpoint, ILogger logger)
+    {
+        try
         {
-            this.endpointsList = endpointsList;
-        }
+            endpointsList.Add(endpoint);
 
-        public void AddEndpointToList(Endpoint endpoint) => endpointsList.Add(endpoint);
-
-        public bool HasAnyEndpoint(ILogger logger)
-        {
-            if (endpointsList.Count <= 0)
-            {
-                logger.Log(LogLevel.Error, $"We don't have any Endpoint registered in our database.");
-                Console.WriteLine("");
-                return false;
-            }
-
+            logger.Log(LogLevel.Information, "Endpoint ADDED successfully!");
+            // System.Console.WriteLine($"************************************************************");
+            // System.Console.WriteLine($"Endpoints list has {Endpoints.endpointsList.Count} endpoints");
+            // System.Console.WriteLine($"************************************************************");
+            // System.Console.WriteLine($"");
             return true;
         }
-
-        public void ListiAllEndpoints()
+        catch (System.Exception ex)
         {
-            Console.WriteLine("LIST of Endpoints");
-            Console.WriteLine("------------------");
-
-            foreach (var endpoint in endpointsList)
-            {
-                endpoint.PrintEndpointInfo();
-            }
-
-            Console.WriteLine($"Total of {endpointsList.Count} Endpoints");
-            Console.WriteLine("----------------------------------------");
-            Console.WriteLine("");
+            logger.Log(LogLevel.Error, ex.Message);
+            return false;
         }
+        
+    }
+
+    public bool HasAnyEndpoint(ILogger logger)
+    {
+        if (endpointsList.Count <= 0)
+        {
+            logger.Log(LogLevel.Error, $"We don't have any Endpoint registered in our database.");
+            Console.WriteLine("");
+            return false;
+        }
+
+        return true;
+    }
+
+    public void ListiAllEndpoints()
+    {
+        Console.WriteLine("LIST of Endpoints");
+        Console.WriteLine("------------------");
+
+        foreach (var endpoint in endpointsList)
+        {
+            endpoint.PrintEndpointInfo();
+        }
+
+        Console.WriteLine($"Total of {endpointsList.Count} Endpoints");
+        Console.WriteLine("----------------------------------------");
+        Console.WriteLine("");
     }
 }
